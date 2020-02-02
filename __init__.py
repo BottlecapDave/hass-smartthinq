@@ -53,7 +53,6 @@ DEPRECATION_WARNING = (
         key_language=CONF_LANGUAGE,
         domain=DOMAIN)
 
-
 def setup(hass, config):
     if DOMAIN not in config:
         LOGGER.warning(DEPRECATION_WARNING)
@@ -84,6 +83,10 @@ class LGDevice(Entity):
     def __init__(self, client, device):
         self._client = client
         self._device = device
+    
+    @property
+    def unique_id(self):
+        return self._device.id
 
     @property
     def name(self):
